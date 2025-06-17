@@ -42,7 +42,7 @@ services:
     container_name: postgres-sql
     restart: unless-stopped
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - db:/data/postgres
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -76,4 +76,4 @@ services:
         read_only: true
 
 volumes:
-  pgdata:
+  db:

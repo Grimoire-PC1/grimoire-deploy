@@ -7,8 +7,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
-    networks:
-      - grimoire-net
     depends_on:
       - grimoire-db
     environment:
@@ -24,8 +22,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - "5173:5173"
-    networks:
-      - grimoire-net
     environment:
       GRIMOIRE_FRONTEND: ${GRIMOIRE_FRONTEND}
       VITE_BACKEND_URL: ${BACKEND_URL}
@@ -36,8 +32,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - "5000:8081"
-    networks:
-      - grimoire-net
     environment:
       DB_URL: ${MONGODB_URL}
       RENDER_URL: ${RENDER_URL}
@@ -69,7 +63,7 @@ services:
   nginx:
     image: nginx:stable-alpine
     ports:
-      - "80:80"
+      - 80:80
     depends_on:
       - grimoire-frontend
       - grimoire-backend
@@ -80,12 +74,6 @@ services:
         source: ./nginx/nginx.conf
         target: /etc/nginx/conf.d/default.conf
         read_only: true
-    networks:
-      - grimoire-net
 
 volumes:
   pgdata:
-
-networks:
-  grimoire-net:
-    driver: bridge

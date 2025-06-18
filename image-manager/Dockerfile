@@ -12,11 +12,13 @@ RUN mkdir -p node_modules && chown -R node:node .
 RUN git clone https://github.com/Grimoire-PC1/image-manager.git && \
     (cd image-manager)
 
+RUN chown -R node:node /home/node/app/image-manager/
+
 WORKDIR /home/node/app/image-manager/
 
-RUN npm install
+USER node
 
-RUN chown -R node:node /home/node/app/image-manager/
+RUN npm install
 
 EXPOSE 5000
 
